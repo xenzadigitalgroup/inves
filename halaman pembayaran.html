@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    header {
+      background: linear-gradient(to right, #64B5F6, #2196F3); /* Warna biru muda bergradasi */
+      color: #fff;
+      text-align: center;
+      padding: 10px;
+      border-radius: 0px 0px 10px 10px;
+    }
+
+    .payment-container {
+      margin: 20px;
+      position: relative;
+    }
+
+    .payment-method {
+      border: 1px solid #ccc;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 0px;
+    }
+
+    .payment-details-box{
+      border: 1px solid #ccc;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 0px;
+    }
+    .payment-method-box {
+      border: 1px solid #ccc;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+    }
+
+    .confirm-button {
+      background-color: #4CAF50; /* Warna hijau */
+      color: #fff;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      position: absolute;
+      bottom: 10px;
+      right: 20px;
+    }
+
+    .back-button {
+      background-color: #FF5733; /* Warna merah */
+      color: #fff;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      position: absolute;
+      bottom: 10px;
+      left: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Metode Pembayaran</h1>
+  </header>
+  <div class="payment-details-box">
+    <h2>Detail Pembelian</h2>
+    <p id="product-name"></p>
+    <p id="quantity"></p>
+  </div>
+  
+  <div class="payment-container">
+    <div class="payment-method-box">
+      <h2>Pilih Metode Pembayaran</h2>
+      <p>Pastikan kamu memilih metode pembayaran yang benar, karena jika telah menekan tombol "Konfirmasi" kamu tidak akan dapat
+        merubah metode pembayarannya kembali!
+      </p>
+      <div class="payment-method">
+        <input type="radio" id="bankTransfer" name="paymentMethod" value="bankTransfer">
+        <label for="bankTransfer">Transfer Bank</label><br>
+        <select id="bankOptions">
+          <option value="BCA">BCA</option>
+          <option value="MANDIRI">MANDIRI</option>
+          <option value="BRI">BRI</option>
+          <option value="DBS">DBS</option>
+          <option value="BNC">BNC</option>
+        </select>
+      </div>
+      <div class="payment-method">
+        <input type="radio" id="eWallet" name="paymentMethod" value="eWallet">
+        <label for="eWallet">E-Wallet</label><br>
+        <select id="eWalletOptions">
+          <option value="Dana">Dana</option>
+          <option value="OVO">Ovo</option>
+          <option value="Gopay">Gopay</option>
+        </select>
+      </div>
+  </div>
+  </div>
+  <button class="confirm-button" onclick="confirmPayment()">Konfirmasi</button>
+  <button class="back-button" onclick="goBack()">Kembali</button>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const productName = decodeURIComponent(urlParams.get('product'));
+    const quantity = urlParams.get('quantity');
+
+    document.getElementById('product-name').innerText = `Produk: ${productName}`;
+    document.getElementById('quantity').innerText = `Jumlah: ${quantity}`;
+
+    function confirmPayment() {
+      const selectedPaymentMethod = document.querySelector('input[name="paymentMethod"]:checked');
+
+      if (selectedPaymentMethod) {
+        const paymentMethod = selectedPaymentMethod.value;
+        const whatsappMessage = `Halo, saya ingin memesan ${quantity} ${productName} dengan metode pembayaran: ${paymentMethod}`;
+        const whatsappNumber = '6281234567890';
+        const whatsappUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(whatsappMessage)}`;
+        window.location.href = whatsappUrl;
+      } else {
+        alert('Pilih metode pembayaran terlebih dahulu.');
+      }
+    }
+
+    function goBack() {
+      window.history.back();
+    }
+  </script>
+</body>
+</html>
