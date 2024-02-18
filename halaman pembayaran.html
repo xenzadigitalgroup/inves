@@ -105,10 +105,14 @@
         </select>
       </div>
   </div>
+  <div class="payment-container">
+  <div class="payment-method-box">
   </div>
-  <button class="confirm-button" onclick="confirmPayment()">Konfirmasi</button>
-  <button class="back-button" onclick="goBack()">Kembali</button>
-
+  
+  <div class="button-container">
+    <button class="confirm-button" onclick="confirmPayment()">Konfirmasi</button>
+    <button class="back-button" onclick="goBack()">Kembali</button>
+  </div>
   <script>
     const urlParams = new URLSearchParams(window.location.search);
     const productName = decodeURIComponent(urlParams.get('product'));
@@ -123,7 +127,7 @@
       if (selectedPaymentMethod) {
         const paymentMethod = selectedPaymentMethod.value;
         const whatsappMessage = `Halo, saya ingin memesan ${quantity} ${productName} dengan metode pembayaran: ${paymentMethod}`;
-        const whatsappNumber = '6281234567890';
+        const whatsappNumber = '6287777483865';
         const whatsappUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(whatsappMessage)}`;
         window.location.href = whatsappUrl;
       } else {
