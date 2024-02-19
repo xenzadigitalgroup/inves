@@ -16,6 +16,11 @@
       text-align: center;
       padding: 10px;
       border-radius: 0px 0px 10px 10px;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      top: 0;
     }
 
     .payment-container {
@@ -84,25 +89,72 @@
       <p>Pastikan kamu memilih metode pembayaran yang benar, karena jika telah menekan tombol "Konfirmasi" kamu tidak akan dapat
         merubah metode pembayarannya kembali!
       </p>
+      <h2>Instant</h2>
       <div class="payment-method">
-        <input type="radio" id="bankTransfer" name="paymentMethod" value="bankTransfer">
-        <label for="bankTransfer">Transfer Bank</label><br>
-        <select id="bankOptions">
-          <option value="BCA">BCA</option>
-          <option value="MANDIRI">MANDIRI</option>
-          <option value="BRI">BRI</option>
-          <option value="DBS">DBS</option>
-          <option value="BNC">BNC</option>
-        </select>
+        <input type="radio" id="XENZA PAY" name="paymentMethod" value="XENZA PAY">
+        <label for="XENZA PAY">Xenza Pay</label><br>
+      </div>
+
+      <h2>QRIS</h2>
+      <div class="payment-method">
+        <input type="radio" id="QRIS ALL PAY" name="paymentMethod" value="QRIS ALL PAY">
+        <label for="QRIS ALL PAY">QRIS ALL PAY</label><br>
       </div>
       <div class="payment-method">
-        <input type="radio" id="eWallet" name="paymentMethod" value="eWallet">
-        <label for="eWallet">E-Wallet</label><br>
-        <select id="eWalletOptions">
-          <option value="Dana">Dana</option>
-          <option value="OVO">Ovo</option>
-          <option value="Gopay">Gopay</option>
-        </select>
+        <input type="radio" id="QRIS BCA" name="paymentMethod" value="QRIS BCA">
+        <label for="QRIS BCA">QRIS BCA</label><br>
+      </div>
+      <div class="payment-method">
+        <input type="radio" id="QRIS DANA" name="paymentMethod" value="QRIS DANA">
+        <label for="QRIS DANA">QRIS DANA</label><br>
+      </div>
+      <h2>Transfer Bank</h2>
+      <div class="payment-method">
+        <input type="radio" id="BCA" name="paymentMethod" value="BCA">
+        <label for="BCA">BCA</label><br>
+      </div>
+
+      <div class="payment-method">
+        <input type="radio" id="MANDIRI" name="paymentMethod" value="MANDIRI">
+        <label for="MANDIRI">MANDIRI</label><br>
+      </div>
+      <div class="payment-method">
+        <input type="radio" id="DBS" name="paymentMethod" value="DBS">
+        <label for="DBS">DBS</label><br>
+      </div>
+      <div class="payment-method">
+        <input type="radio" id="BNC" name="paymentMethod" value="BNC">
+        <label for="BNC">BNC</label><br>
+      </div>
+      <div class="payment-method">
+        <input type="radio" id="CIMB NIAGA" name="paymentMethod" value="CIMB NIAGA">
+        <label for="CIMB NIAGA">CIMB NIAGA</label><br>
+      </div>
+      <div class="payment-method">
+        <input type="radio" id="SINARMAS" name="paymentMethod" value="SINARMAS">
+        <label for="SINARMAS">SINARMAS</label><br>
+      </div>
+      <div class="payment-method">
+        <input type="radio" id="DANAMON" name="paymentMethod" value="DANAMON">
+        <label for="DANAMON">DANAMON</label><br>
+      </div>
+      <div class="payment-method">
+        <input type="radio" id="BTPN" name="paymentMethod" value="BTPN">
+        <label for="BTPN">BTPN</label><br>
+      </div>
+
+      <h2>E-Wallet</h2>
+      <div class="payment-method">
+        <input type="radio" id="DANA" name="paymentMethod" value="DANA">
+        <label for="DANA">DANA</label><br>
+      </div>
+      <div class="payment-method">
+        <input type="radio" id="GOPAY" name="paymentMethod" value="GOPAY">
+        <label for="GOPAY">GOPAY</label><br>
+      </div>
+      <div class="payment-method">
+        <input type="radio" id="OVO" name="paymentMethod" value="OVO">
+        <label for="OVO">OVO</label><br>
       </div>
   </div>
   <div class="payment-container">
