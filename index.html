@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>XENZA INVES</title>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <title>Dynamic Line Chart with Time Range</title>
   <style>
     body {
-      margin: 0;
       font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
     }
 
     header {
@@ -43,304 +43,168 @@
       margin-right: 20px;
     }
 
-    section {
-      padding: 70px 20px 20px; /* Adjusted padding to accommodate fixed header */
-    }
-
-    .product {
-      border: 1px solid #ddd;
-      border-radius: 8px; /* Border radius added */
-      padding: 10px;
-      margin: 10px; /* Adjusted margin */
+    #chart-container {
+      width: 80%;
+      margin: auto;
       position: relative;
+      margin-top: 90px;
     }
 
-    .product-title {
-      font-weight: bold;
-      font-size: 16px;
-      margin-bottom: 10px;
-    }
-
-    .buy-button {
-      position: absolute;
-      bottom: 10px;
-      right: 10px;
-      background-color: #4CAF50;
-      border-radius: 6px;
-      color: #fff;
-      padding: 5px 10px;
-      border: none;
-      cursor: pointer;
-    }
-
-    .buy-button:hover {
-      background-color: #00ff0d;
-    }
-    
-    
-
-      .marquee {
-        display: inline-block;
-        white-space: nowrap;
-        animation: marquee 12s linear infinite;
-      }
-
-      @keyframes marquee {
-        0% {
-          transform: translateX(100%);
-        }
-        100% {
-          transform: translateX(-100%);
-        }
-      }
-      /* Warna hijau untuk persentase yang positif */
-.finansial-container span.green {
-    color: green;
-}
-
-/* Warna merah untuk persentase yang negatif */
-.finansial-container span.red {
-    color: red;
-}
-
-/* Warna hijau untuk nominal positif */
-.finansial-container span.green-amount {
-    color: green;
-}
-
-/* Warna hijau untuk persentase yang positif di dalam marquee */
-.marquee span.green {
-    color: green;
-}
-
-/* Warna merah untuk persentase yang negatif di dalam marquee */
-.marquee span.red {
-    color: red;
-}
-.logo-container {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      z-index: 1001; /* Higher z-index than the navbar */
-    }
-
-    .logo-container img {
-      height: 70px; /* Adjust the height as needed */
-    }
-    .graph-container {
-      position: relative;
-      width: 100%;
-      height: 280px; /* Adjust the height as needed */
-      margin: 0px;
-    }
-
-    #marketGraph {
-      width: 100%;
-      height: 100%;
-    }
-    .product-price {
-      font-weight: bold;
-      color: #4CAF50; /* Green color for product price */
-    }
-
-    .quantity-info {
-      display: flex;
-      flex-direction: column; /* Changed to column */
-      align-items: left;
-    }
-
-    .quantity-input {
-      width: 40px;
+    #time-range-buttons {
       text-align: center;
-      margin-bottom: 5px; /* Added margin bottom */
+      position: absolute;
+      top: 205px;
+      left: 50%;
+      transform: translateX(-50%);
     }
 
+    #time-range-buttons button {
+      margin: 5px;
+      border-radius: 5px;
+    }
+
+    #chart-description {
+      text-align: center;
+      margin-top: 50px;
+      color: #333;
+      border: 1px solid #ccc;
+      padding: 10px;
+      border-radius: 8px;
+    }
+
+    #chart-description h3 {
+      text-align: left; /* Set paragraf pada kotak RUPS ke kiri */
+    }
+
+    #chart-description p {
+      text-align: left; /* Set paragraf pada kotak RUPS ke kiri */
+      margin: 5px 0; /* Beri sedikit margin untuk pemisah */
+    }
+
+    #copyright {
+      text-align: center;
+      margin-top: 20px;
+      color: #777;
+      font-size: 12px;
+    }
+    
   </style>
 </head>
 <body>
-  <header>
-    <span>Investasi</span>
-    <a href="#saham">Saham</a>
-    <a href="#rdn">RDN</a>
-    <a href="#obligasi">Obligasi</a>
-    <span>|</span>
+
+<header>
+    <span>Pusat Informasi Market</span>
     <a href="#logo">
-      <img src="https://xenzadigitalgroup.github.io/academy.my.id/xz_tower-removebg-preview.png" alt="Logo" width="50" height="50">
+    <img src="https://xenzadigitalgroup.github.io/academy.my.id/xz_tower-removebg-preview.png" alt="Logo" width="50" height="50">
     </a>
-  </header>
+</header>
 
-  <section>
-    <div class="graph-container">
-      <canvas id="marketGraph"></canvas>
-    </div>
-    <div class="product">
-      <h2>RUPS</h2>
-      <p>Tanggal  : 29 Feb 2024</p>
-      <p>Lokasi   : Gedung kantor Apartment Seri Kasturi U13, Lt.11, Persiaran Setia Gemilang, Shah Alam, Selangor, Malaysia</p>
-    </div>
-    <h3 class="product-title">Saham</h3>
-    <div id="saham" class="product">
-      <h2>BANK XENZA DIGITAL</h2>
-      <p>+16% p.a</p>
-      <p>Bank XENZA DIGITAL adalah bank digital yang bergerak secara digital/online. Bank ini adalah bank yang mengurus seluruh
-        keuangan pada XENZA DIIGITAL GROUP
-      </p>
-      <div class="quantity-info">
-        <span>Minimum Jumlah beli:</span>
-        <input type="number" class="quantity-input" value="1" min="1" max="1">
-        <span>Minimum pembelian: <span class="product-price">Rp150.000</span></span>
-      </div>
-      <button class="buy-button" onclick="redirectToPayment('BANK XENZA DIGITAL', 1)">Beli</button>
-    </div>
-    <div id="saham" class="product">
-      <h2>XENZA TOWER DIGITAL</h2>
-      <p>+11% p.a</p>
-      <p>XENZA TOWER DIGITAL adalah sebuah tempat yang dimana mengurus seluruh jalur transaksi pada XENZA DIGITAL. Ini
-        juga terletak pada bidang digital
-      </p>
-      <div class="quantity-info">
-        <span>Minimum Jumlah beli:</span>
-        <input type="number" class="quantity-input" value="1" min="1" max="1">
-        <span>Minimum pembelian: <span class="product-price">Rp100.000</span></span>
-      </div>
-      <button class="buy-button" onclick="redirectToPayment('XENZA TOWER DIGITAL', 1)">Beli</button>
-    </div>
-  </section>
+<div id="chart-container">
+  <canvas id="myChart"></canvas>
+  <div id="time-range-buttons">
+    <button onclick="updateChart('1d')">1D</button>
+    <button onclick="updateChart('1w')">1W</button>
+    <button onclick="updateChart('1m')">1M</button>
+    <button onclick="updateChart('1y')">1Y</button>
+  </div>
+  <div id="chart-description">
+    <h3>RUPS</h3>
+    <p>Tanggal  : 22 Apr 2024</p>
+    <p>Lokasi   : Gedung kantor Apartment Seri Kasturi U13, Lt.11, Persiaran Setia Gemilang, Shah Alam, Selangor, Malaysia</p>
 
-  <section>
-    <h3 class="product-title">RDN</h3>
-    <div id="rdn" class="product">
-      <h2>XENZA-RDN 1 Dinamis</h2>
-      <p>+8.7% p.a</p>
-      <p>XENZA-RDN 1 Dinamis adalah sebuah Reksadana yang berfokus pada instrumemn padar uang 100% dengan peningkatan yang cukup signifikan</p>
-      <div class="quantity-info">
-        <span>Minimum Jumlah beli:</span>
-        <input type="number" class="quantity-input" value="1" min="1" max="1">
-        <span>Minimum pembelian: <span class="product-price">Rp10.000</span></span>
-      </div>
-      <button class="buy-button" onclick="redirectToPayment('XENZA-RDN 1 Dinamis', 1)">Beli</button>
-    </div>
-    <div id="rdn" class="product">
-      <h2>XENZA-RDN Kas 1 Kelas A</h2>
-      <p>+8.2% p.a</p>
-      <p>XENZA-RDN Kas 1 Kelas A adalah Reksadana yang berfokus pada instrumen pasar modal dan instrumen bersifat ekuitas, dan beberapa
-        dana di simpan dalam bentuk KAS
-      </p>
-      <div class="quantity-info">
-        <span>Minimum Jumlah beli:</span>
-        <input type="number" class="quantity-input" value="1" min="1" max="1">
-        <span>Minimum pembelian: <span class="product-price">Rp10.000</span></span>
-      </div>
-      <button class="buy-button" onclick="redirectToPayment('XENZA-RDN Kas 1 Kelas A', 1)">Beli</button>
-    </div>
-  </section>
-  <section>
-    <h3 class="product-title">Obligasi</h3>
-    <div id="obligasi" class="product">
-      <h2>Belum ada obligasi saat ini</h2>
-      </div>
-      </section>
+    <h3>RUPS (Selesai)</h3>
+    <p>Tanggal  : 29 Feb 2024</p>
+    <p>Lokasi   : Gedung kantor Apartment Seri Kasturi U13, Lt.11, Persiaran Setia Gemilang, Shah Alam, Selangor, Malaysia</p>
+  </div>
+
+  <div id="chart-description">
+    <h3>Alokasi Aset</h3>
+    <h4>SAHAM</h4>
+    <p>1. (XTD)-XENZA TOWER DIGITAL</p>
+    <p>2. (XID)-XENZA IND DIGITAL</p>
+
+    <h4>RDN SAHAM</h4>
+    <p>1. BNP Paribas SRI KEHATI</p>
+    <p>Top holding : BBCA, BMRI, BBNI, BBRI, ICBP</p>
+    <p>2. TRIM Kapital Plus</p>
+    <p>Top holding : BMRI, BBCA, BBRI, TLKM, ISAT</p>
+    <p>3. Majoris Saham Alokasi Dinamik</p>
+    <p>Top holding : ASII, BBCA, BMRI, BBNI, BBRI</p>
+
+    <h4>DEPOSITO</h4>
+    <p>1. (XDB)-XENZA DEPOSITO BERJANGKA</p>
+    <P>Top holding : Deposito BNC, Deposito BPR</P>
+  </div>
+
+  <div id="chart-description">
+    <h3>Rekening</h3>
+    <h4>Bank Penampung</h4>
+    <p>1. BCA</p>
+    <P>2. OCBC NISP</P>
+    <p>3. BNC</p>
+
+    <h4>Bank Kustodian</h4>
+    <p>1. BCA</p>
+    <p>2. OCBC NISP</p>
+  </div>
+</div>
+<div id="copyright">
+    &copy; 2024 PT XENZA INVESTASI SEKURITAS (Perseroan) Tbk. All rights reserved.
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-    // Load Chart.js before drawing the graph
-    function loadChartJs(callback) {
-      var script = document.createElement('script');
-      script.type = 'text/javascript';
-      script.src = 'https://cdn.jsdelivr.net/npm/chart.js';
-      script.onload = callback;
-      document.head.appendChild(script);
+  // Dummy data for different time ranges
+  const data = {
+    '1d': [1200, 1328, 1000, 800, 760, 700, 600, 500, 470],
+    '1w': [800, 1428, 1700, 1600, 1760, 1700, 1900, 1950, 2000],
+    '1m': [300, 428, 700, 800, 850, 400, 900, 950, 1000],
+    '1y': [100, 500, 900, 1100, 1400, 1700, 1900, 1950, 2000]
+  };
+
+  // Initial data for the chart
+  const initialData = data['1d'];
+
+  // Function to update the chart based on the selected time range
+  function updateChart(timeRange) {
+    const chartData = data[timeRange];
+
+    myChart.data.datasets[0].data = chartData;
+    myChart.update();
+  }
+
+  // Chart.js configuration
+  const ctx = document.getElementById('myChart').getContext('2d');
+  const myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: ['Rp100', 'Rp120', 'Rp140', 'Rp160', 'Rp180', 'Rp200', 'Rp220', 'Rp240', 'Rp260'],
+      datasets: [{
+        label: 'Harga Market Gabungan',
+        data: initialData,
+        borderColor: '#3498db',
+        backgroundColor: 'rgba(52, 152, 219, 0.2)',
+        borderWidth: 2,
+        tension: 0.4,
+        fill: true,
+        shadowOffsetX: 3,
+        shadowOffsetY: 3,
+        shadowBlur: 5,
+        shadowColor: 'rgba(0, 0, 0, 0.1)',
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
     }
+  });
 
-    // Draw the market graph using Chart.js
-    function drawMarketGraph() {
-      var canvas = document.getElementById("marketGraph");
-      var ctx = canvas.getContext("2d");
+  // Initial chart render
+  updateChart('1y');
+</script>
 
-      // Data for market graph
-      var marketData = [
-        { x: '1', y: 150000 },
-        { x: '2', y: 160000 },
-        { x: '3', y: 175000 },
-        { x: '4', y: 190000 },
-        { x: '5', y: 195000 },
-        { x: '6', y: 200000 },
-        { x: '7', y: 210000 },
-        { x: '8', y: 215000 },
-        { x: '9', y: 230000 },
-        { x: '10', y: 230000 },
-        { x: '11', y: 230000 },
-        { x: '12', y: 230000 },
-        { x: '13', y: 220000 },
-        { x: '14', y: 210000 },
-        { x: '15', y: 210000 },
-        { x: '16', y: 210000 },
-        { x: '17', y: 210000 },
-        { x: '18', y: 230000 },
-        { x: '19', y: 240000 },
-        { x: '20', y: 250000 },
-        { x: '21', y: 260000 },
-        { x: '22', y: 265000 },
-        { x: '23', y: 270000 },
-        { x: '24', y: 280000 },
-        { x: '25', y: 300000 },
-        { x: '26', y: 310000 },
-        { x: '27', y: 330000 },
-        { x: '28', y: 330000 },
-        { x: '29', y: 335000 },
-        { x: '30', y: 350000 },
-        { x: '31', y: 360000 },
-        { x: '32', y: 370000 },
-      ];
-
-      // Membuat grafik garis dengan area terisi dengan Chart.js
-      new Chart(ctx, {
-        type: 'line',
-        data: {
-          datasets: [
-            {
-              data: marketData,
-              label: 'Harga Market Gabungan XDG',
-              borderColor: '#00ff0d', // Warna garis
-              fill: true, // Mengisi area di bawah garis
-              backgroundColor: 'rgba(98, 251, 84, 0.496)', // Warna area terisi
-              pointRadius: 0, // Remove circular points
-            },
-          ],
-        },
-        options: {
-          scales: {
-            x: {
-              position: 'bottom',
-              title: {
-                display: true,
-                text: 'Avg',
-              },
-            },
-            y: {
-              type: 'linear',
-              position: 'left',
-              title: {
-                display: true,
-                text: 'Harga (Rp)',
-              },
-            },
-          },
-          elements: {
-            line: {
-              tension: 0.4, // Adjust the tension for curved lines
-            },
-          },
-        },
-      });
-    }
-
-    // Load Chart.js and then draw the graph
-    loadChartJs(drawMarketGraph);
-
-    function redirectToPayment(productName, quantity) {
-      // Redirect to payment page with product information
-      const paymentUrl = `halaman pembayaran.html?product=${encodeURIComponent(productName)}&quantity=${quantity}`;
-      window.location.href = paymentUrl;
-    }
-  </script>
 </body>
 </html>
