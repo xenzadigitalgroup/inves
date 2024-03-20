@@ -171,10 +171,10 @@
 <script>
   // Dummy data for different time ranges
   const data = {
-    '1d': [1000, 300, 300, 300, 300],
+    '1d': [1000, 300, 300, 300, 300, 300, 300, 300, 300, 300],
     '1w': [5800, 5800, 2000, 800, 400],
     '1m': [1000, 1150, 5800, 800],
-    '1y': [1000, 1500, 1900, 2100, 2500]
+    '1y': [1000, 1500, 1900, 2100, 2500, 2300, 2700, 3000, 3400, 3800]
   };
 
   // Initial data for the chart
@@ -193,7 +193,7 @@
   const myChart = new Chart(ctx, {
     type: 'line',
     data: {
-      labels: ['1', '2', '3', '4','Final'],
+      labels: ['.', '.', '.', '.', '.', '.', '.', '.', '.', 'F'],
       datasets: [{
         label: 'Market Suspend',
         data: initialData,
