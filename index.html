@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dynamic Line Chart with Time Range</title>
   <style>
-   body {
+    body {
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
@@ -58,14 +58,15 @@
     }
 
     #time-range-buttons button {
-     margin: 5px;
-     border-radius: 5px;
-     background-color: #ffffff;
-     color: #000000;
-     padding: 12px 16px; /* Sesuaikan nilai padding dengan preferensi Anda */
-     cursor: pointer;
-     width: 150px; /* Atur lebar sesuai dengan kebutuhan Anda */
-}
+      margin: 5px;
+      border-radius: 5px;
+      border-color: #0000004d;
+      background-color: #ffffff;
+      color: #000000;
+      padding: 12px 16px; /* Sesuaikan nilai padding dengan preferensi Anda */
+      cursor: pointer;
+      width: 150px; /* Atur lebar sesuai dengan kebutuhan Anda */
+    }
 
     #myChart {
       flex: 1; /* Expand to fill available space */
@@ -109,6 +110,23 @@
       background-color: #f2f2f2;
     }
 
+    #marketOpenIndicator {
+      width: 10px;
+      height: 10px;
+      background-color: green;
+      border-radius: 50%; /* Membuatnya berbentuk lingkaran */
+      display: inline-block;
+      animation: blinker 1s linear infinite; /* Animasi berkedip */
+      margin-right: 5px; /* Memberi jarak dari tulisan Market Open */
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+
+
     #copyright {
       text-align: center;
       margin-top: 20px;
@@ -118,20 +136,45 @@
 
     /* Media query for mobile devices */
     @media only screen and (max-width: 600px) {
-    #time-range-buttons button {
-    width: auto; /* Reset lebar tombol untuk membiarkannya menyesuaikan kontennya */
-    margin: 5px;
+      #time-range-buttons button {
+        width: auto; /* Reset lebar tombol untuk membiarkannya menyesuaikan kontennya */
+        margin: 5px;
       }
     }
+    #marketCountdown {
+      border: 1px solid #ccc;
+      background-color: #f2f2f2;
+      padding: 10px;
+      border-radius: 8px;
+      text-align: center;
+}
+
+#chart-container {
+  width: 80%;
+  margin: auto;
+  position: relative;
+  margin-top: 90px;
+  display: flex;
+  flex-direction: column; /* Change to column layout for better responsiveness */
+  overflow: hidden; /* Add overflow: hidden to ensure all content stays within the box */
+}
+
+#myChart {
+  flex: 1; /* Expand to fill available space */
+  border: 2px solid rgba(0, 0, 0, 0); /* Add a solid black border */
+  border-radius: 12px;
+}
+
+    
   </style>
 </head>
 <body>
 
-  <header>
-    <span>Pusat Informasi Market</span>
-    <a href="#logo">
+<header>
+  <span>Pusat Informasi Market</span>
+  <a href="#logo">
     <img src="https://xenzadigitalgroup.github.io/academy.my.id/xz_tower-removebg-preview.png" alt="Logo" width="50" height="50">
-    </a>
+  </a>
 </header>
 
 <div id="chart-container">
@@ -141,7 +184,9 @@
     <button onclick="updateChart('1m')">1M</button>
     <button onclick="updateChart('1y')">1Y</button>
   </div>
-  <canvas id="myChart"></canvas>
+  <canvas id="myChart" class="chart-container"></canvas>
+  <p id="marketStatus">Market Open</p>
+  <p id="marketCountdown"></p>
   <div id="orderBookContainer">
     <table id="orderBook">
       <thead>
@@ -215,12 +260,12 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-  // Dummy data for different time ranges
+  // 30 Data
   const data = {
-    '1d': [150, 250, 350, 400, 350, 400, 350, 400, 350, 400, 400, 350, 400, 350, 400, 350, 400, 350, 400, 350],
-    '1w': [150, 150, 270, 500, 150, 170, 150, 400, 500, 400, 350, 400, 350, 400],
-    '1m': [250, 250, 150, 150, 150, 270, 500, 150, 400, 350, 400, 350, 400],
-    '1y': [1000, 1500, 1900, 2100, 2500, 2300, 2700, 3000, 3400, 3800, 3900, 4000, 4100, 4200, 4300, 3800, 4200, 4300, 4400, 4500]
+    '1d': [150, 80, 350, 400, 350, 400, 350, 400, 350, 400, 400, 350, 400, 350, 400, 350, 400, 350, 400, 350, 300, 320, 300, 320, 300, 320, 300, 320, 300, 320],
+    '1w': [150, 150, 270, 80, 150, 170, 150, 200, 300, 200, 300, 200, 350, 450, 350, 400, 320, 300],
+    '1m': [250, 250, 150, 150, 150, 270, 500, 150, 400, 350, 400, 350, 400, 450, 350, 450, 350],
+    '1y': [1000, 1500, 1900, 2100, 2500, 2300, 2700, 3000, 3400, 3800, 3900, 4000, 4100, 4200, 4300, 3800, 4200, 4300, 4400, 4500, 4300, 4350, 4400, 4500, 4700, 4800, 4900, 4920, 4950, 5000]
   };
 
   // Initial data for the chart
@@ -235,37 +280,57 @@
   }
 
   // Chart.js configuration
-  const ctx = document.getElementById('myChart').getContext('2d');
-  const myChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels: ['.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'F'], // 21 Data
-      datasets: [{
-        label: 'Market Gabungan',
-        data: initialData,
-        borderColor: 'green',
-        backgroundColor: 'rgba(100, 0, 100, 0)',
-        borderWidth: 2,
-        tension: 0.4,
-        fill: true,
-        pointRadius: 0,  // Disable rendering points
-        shadowOffsetX: 3,
-        shadowOffsetY: 3,
-        shadowBlur: 5,
-        shadowColor: 'rgba(0, 0, 0, 0.1)',
-      }]
+const ctx = document.getElementById('myChart').getContext('2d');
+const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+gradient.addColorStop(0, 'rgba(0, 128, 0, 0.3)'); // Hijau dengan kejelasan 0.3 di bagian atas
+gradient.addColorStop(1, 'rgba(255, 255, 255, 0)'); // Putih transparan di bagian bawah
+const myChart = new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels: ['.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'F'], // 30 Data
+    datasets: [{
+      label: 'Market Gabungan Saham ID & US',
+      data: initialData,
+      borderColor: 'green',
+      backgroundColor: gradient, // Gunakan gradient untuk bayangan
+      borderWidth: 2,
+      tension: 0.4,
+      fill: true, // Izinkan untuk mengisi area di bawah garis
+      pointRadius: 0,  // Disable rendering points
+      shadowOffsetX: 0, // Atur offset bayangan ke 0
+      shadowOffsetY: 8, // Atur offset bayangan ke 8 (arah ke bawah)
+      shadowBlur: 10, // Atur blur bayangan
+      shadowColor: 'rgba(0, 128, 0, 0.8)', // Atur warna bayangan
+    }]
+  },
+  options: {
+    scales: {
+      x: {
+        display: false, // Menonaktifkan grid pada sumbu x
+      },
+      y: {
+        display: false, // Menonaktifkan grid pada sumbu y
+        beginAtZero: true
+      }
     },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
-        }
+    plugins: {
+      legend: {
+        display: false
+      },
+      tooltip: {
+        enabled: false
       }
     }
-  });
+  }
+});
 
   // Update order book table with random data every 5 seconds
   function updateOrderBookTable() {
+  // Dapatkan hari saat ini
+  const today = new Date().getDay();
+
+  // Cek apakah hari saat ini adalah Senin (1), Selasa (2), atau Rabu (3)
+  if (today >= 1 && today <= 5) {
     const tableBody = document.querySelector('#orderBook tbody');
     tableBody.innerHTML = '';
 
@@ -291,15 +356,50 @@
       freqCell2.textContent = Math.floor(Math.random() * 100);
     }
   }
+}
 
-  // Initial chart render
-  updateChart('1d');
+// Initial order book update
+updateOrderBookTable();
 
-  // Initial order book update
+// Update order book every 5 seconds
+setInterval(updateOrderBookTable, 2000);
+function updateMarketStatus() {
+  const today = new Date().getDay();
+  const marketStatus = document.getElementById('marketStatus');
+  const marketCountdown = document.getElementById('marketCountdown'); // Tambahkan variabel untuk hitungan mundur
+
+  if (today >= 1 && today <= 5) {
+    marketStatus.textContent = 'Market Open';
+    marketStatus.classList.add('open');
+    marketStatus.classList.remove('closed');
+    marketCountdown.textContent = ''; // Hapus hitungan mundur jika pasar terbuka
+  } else {
+    marketStatus.textContent = 'Market Closed';
+    marketStatus.classList.add('closed');
+    marketStatus.classList.remove('open');
+
+    // Hitung mundur hingga pasar dibuka kembali
+    const nextOpen = new Date();
+    nextOpen.setDate(nextOpen.getDate() + (1 + 7 - today) % 7); // Hitung hari berikutnya yang buka
+    nextOpen.setHours(9, 0, 0); // Atur jam pasar buka (misalnya, pukul 09:00)
+    const countdown = Math.floor((nextOpen - new Date()) / 1000); // Hitung selisih waktu dalam detik
+    const hours = Math.floor(countdown / 3600);
+    const minutes = Math.floor((countdown % 3600) / 60);
+    const seconds = countdown % 60;
+    marketCountdown.textContent = `Market akan buka dalam ${hours}h ${minutes}m ${seconds}s`;
+  }
+}
+
+// Initial update
+updateMarketStatus();
+
+// Update status and order book every second
+setInterval(() => {
+  updateMarketStatus();
   updateOrderBookTable();
+}, 1000);
 
-  // Update order book every 5 seconds
-  setInterval(updateOrderBookTable, 1000);
+
 </script>
 
 </body>
