@@ -89,6 +89,26 @@
       margin: 5px 0;
     }
 
+    #orderBookContainer {
+      margin-top: 20px;
+      overflow-x: auto;
+    }
+
+    #orderBook {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    #orderBook th, #orderBook td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: center;
+    }
+
+    #orderBook th {
+      background-color: #f2f2f2;
+    }
+
     #copyright {
       text-align: center;
       margin-top: 20px;
@@ -122,6 +142,26 @@
     <button onclick="updateChart('1y')">1Y</button>
   </div>
   <canvas id="myChart"></canvas>
+  <div id="orderBookContainer">
+    <table id="orderBook">
+      <thead>
+        <tr>
+          <th>Freq</th>
+          <th>Lot</th>
+          <th>Bid</th>
+          <th>Ask</th>
+          <th>Lot</th>
+          <th>Freq</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Data akan diisi melalui JavaScript -->
+      </tbody>
+    </table>
+  </div>
+<div id="chart-description">
+  <!-- Kode chart description tetap sama -->
+</div>
   <div id="chart-description">
     <h3>RUPS</h3>
     <p>Tanggal  : 22 Apr 2024</p>
@@ -224,8 +264,42 @@
     }
   });
 
+  // Update order book table with random data every 5 seconds
+  function updateOrderBookTable() {
+    const tableBody = document.querySelector('#orderBook tbody');
+    tableBody.innerHTML = '';
+
+    for (let i = 0; i < 10; i++) {
+      const newRow = tableBody.insertRow();
+
+      const freqCell1 = newRow.insertCell();
+      freqCell1.textContent = Math.floor(Math.random() * 100);
+
+      const lotCell1 = newRow.insertCell();
+      lotCell1.textContent = Math.floor(Math.random() * 1000);
+
+      const bidCell = newRow.insertCell();
+      bidCell.textContent = (Math.random() * 100).toFixed(2);
+
+      const askCell = newRow.insertCell();
+      askCell.textContent = (Math.random() * 100).toFixed(2);
+
+      const lotCell2 = newRow.insertCell();
+      lotCell2.textContent = Math.floor(Math.random() * 1000);
+
+      const freqCell2 = newRow.insertCell();
+      freqCell2.textContent = Math.floor(Math.random() * 100);
+    }
+  }
+
   // Initial chart render
   updateChart('1d');
+
+  // Initial order book update
+  updateOrderBookTable();
+
+  // Update order book every 5 seconds
+  setInterval(updateOrderBookTable, 1000);
 </script>
 
 </body>
