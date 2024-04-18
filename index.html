@@ -165,7 +165,29 @@
   border: 2px solid rgba(0, 0, 0, 0); /* Add a solid black border */
   border-radius: 12px;
 }
+#help-button {
+      position: fixed; /* Tetap di tempat saat di-scroll */
+      bottom: 20px; /* Jarak dari bawah */
+      right: 20px; /* Jarak dari kanan */
+      z-index: 1000; /* Pastikan di atas konten lain */
+      background-color: #00000000; /* Warna latar belakang */
+      color: #fff; /* Warna teks */
+      padding: 10px 20px; /* Padding */
+      border-radius: 5px; /* Sudut melengkung */
+      cursor: pointer; /* Kursor menunjukkan tindakan */
+    }
 
+    #help-button:hover {
+      background-color: #0b7dda00; /* Warna latar belakang saat di-hover */
+    }
+
+    /* Media query for mobile devices */
+    @media only screen and (max-width: 600px) {
+      #time-range-buttons button {
+        width: auto;
+        margin: 5px;
+      }
+    }
     
   </style>
 </head>
@@ -185,6 +207,11 @@
     <button onclick="updateChart('1m')">1M</button>
     <button onclick="updateChart('1y')">1Y</button>
   </div>
+  <!-- Tombol bantuan -->
+<a href="https://xenzadigitalgroup.github.io/forum/" id="help-button">
+  <img src="chat.png" alt="Chat Icon" width="30" height="30">
+</a>
+
   <canvas id="myChart" class="chart-container"></canvas>
   <p id="marketStatus">Market Open</p>
   <p id="marketCountdown"></p>
