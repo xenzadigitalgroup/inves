@@ -267,66 +267,50 @@
     myChart.update();
   }
 
-  // Konfigurasi Chart.js
-const ctx = document.getElementById('myChart').getContext('2d');
-const gradient = ctx.createLinearGradient(0, 0, 0, 400);
-gradient.addColorStop(0, 'rgba(0, 128, 0, 0.3)'); // Hijau dengan kejelasan 0.3 di bagian atas
-gradient.addColorStop(1, 'rgba(255, 255, 255, 0)'); // Putih transparan di bagian bawah
-const myChart = new Chart(ctx, {
+  // Chart.js configuration
+  const ctx = document.getElementById('myChart').getContext('2d');
+  const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+  gradient.addColorStop(0, 'rgba(0, 128, 0, 0.3)'); // Hijau dengan kejelasan 0.3 di bagian atas
+  gradient.addColorStop(1, 'rgba(255, 255, 255, 0)'); // Putih transparan di bagian bawah
+  const myChart = new Chart(ctx, {
     type: 'line',
     data: {
-        labels: Array.from({ length: initialData.length }).fill('.'),
-        datasets: [{
-            label: 'Market Gabungan Saham ID & US',
-            data: initialData,
-            borderColor: 'green',
-            backgroundColor: gradient,
-            borderWidth: 2,
-            tension: 0.4,
-            fill: true,
-            pointRadius: 0,
-            shadowOffsetX: 0,
-            shadowOffsetY: 10,
-            shadowBlur: 10,
-            shadowColor: 'rgba(0, 128, 0, 0.8)',
-        }]
+      labels: Array.from({ length: initialData.length }).fill('.'), // 30 Data
+      datasets: [{
+        label: 'Market Gabungan Saham ID & US',
+        data: initialData,
+        borderColor: 'green',
+        backgroundColor: gradient, // Gunakan gradient untuk bayangan
+        borderWidth: 2,
+        tension: 0.4,
+        fill: true, // Izinkan untuk mengisi area di bawah garis
+        pointRadius: 0,  // Disable rendering points
+        shadowOffsetX: 0, // Atur offset bayangan ke 0
+        shadowOffsetY: 10, // Atur offset bayangan ke 8 (arah ke bawah)
+        shadowBlur: 10, // Atur blur bayangan
+        shadowColor: 'rgba(0, 128, 0, 0.8)', // Atur warna bayangan
+      }]
     },
     options: {
-        scales: {
-            x: {
-                display: false,
-            },
-            y: {
-                display: true,
-                beginAtZero: false
-            }
+      scales: {
+        x: {
+          display: false, // Menonaktifkan grid pada sumbu x
         },
-        plugins: {
-            legend: {
-                display: true
-            },
-            tooltip: {
-                enabled: true,
-                callbacks: {
-                    label: function(tooltipItem) {
-                        return tooltipItem.formattedValue;
-                    }
-                }
-            }
+        y: {
+          display: true, // Menonaktifkan grid pada sumbu y
+          beginAtZero: false
         }
+      },
+      plugins: {
+        legend: {
+          display: true // Menyembunyikan legend
+        },
+        tooltip: {
+          enabled: false
+        }
+      }
     }
-});
-
-// Event listener untuk menangani klik pada grafik
-canvas.onclick = function(evt) {
-    const activePoint = myChart.getElementsAtEventForMode(evt, 'nearest', { intersect: true });
-    if (activePoint.length > 0) {
-        const firstPoint = activePoint[0];
-        const label = myChart.data.labels[firstPoint.index];
-        const value = myChart.data.datasets[firstPoint.datasetIndex].data[firstPoint.index];
-        alert(`Nilai pada ${label}: ${value}`);
-    }
-};
+  });
 
   // Update order book table with random data every 5 seconds
   function updateOrderBookTable() {
