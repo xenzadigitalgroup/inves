@@ -248,12 +248,12 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-  // 30 Data
+  // 50 Data
   const data = {
-    '1d': [350, 350, 250, 340, 340, 340, 350, 355, 355, 350, 360, 360, 360, 370, 380, 370, 370, 380, 360, 360, 370, 380, 380, 370, 380, 380, 350, 360, 400, 400],
-    '1w': [130, 150, 170, 190, 200, 210, 200, 210, 250, 320, 340, 350, 360, 380, 370, 400],
-    '1m': [210, 130, 190, 260, 340, 350, 380, 370, 400],
-    '1y': [1000, 1500, 1900, 2100, 2500, 2300, 2700, 3000, 3400, 3800, 3900, 4000, 4100, 4200, 4300, 3800, 4200, 4300, 4400, 4500, 4300, 4350, 4400, 4500, 4700, 4800, 4900, 4920, 4950, 5000]
+    '1d': [400, 550, 450, 450, 450, 420, 420, 400, 375, 360, 350, 330, 330, 340, 340, 330, 330, 320, 320, 340, 340, 340, 350, 350, 350, 360, 360, 350, 340, 350, 350, 350, 350, 360, 360, 360, 360, 360, 370, 370, 360, 360, 350, 350, 350],
+    '1w': [130, 150, 170, 190, 200, 210, 200, 210, 250, 320, 340, 350, 360, 380, 370, 400, 360, 370, 370, 360, 360, 350, 350, 350, 360, 370, 370, 360, 360, 350, 350, 350, 360, 370, 370, 360, 360, 350, 350, 350, 330, 340, 340, 340, 340],
+    '1m': [210, 130, 190, 260, 340, 350, 380, 370, 400, 360, 360, 350, 350, 350, 330, 340, 340, 340, 340],
+    '1y': [1000, 1500, 1900, 2100, 2500, 2300, 2700, 3000, 3400, 3800, 3900, 4000, 4100, 4200, 4300, 3800, 4200, 4300, 4400, 4500, 4300, 4350, 4400, 4500, 4700, 4800, 4900, 4920, 4950, 5000, 5500, 5000, 5500, 5600, 5700, 6000, 6000, 6500, 7000, 6300, 6400, 6500, 6650]
   };
 
   // Initial data for the chart
@@ -273,44 +273,46 @@
   gradient.addColorStop(0, 'rgba(0, 128, 0, 0.3)'); // Hijau dengan kejelasan 0.3 di bagian atas
   gradient.addColorStop(1, 'rgba(255, 255, 255, 0)'); // Putih transparan di bagian bawah
   const myChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels: Array.from({ length: initialData.length }).fill('.'), // 30 Data
-      datasets: [{
-        label: 'Market Gabungan Saham ID & US',
-        data: initialData,
-        borderColor: 'green',
-        backgroundColor: gradient, // Gunakan gradient untuk bayangan
-        borderWidth: 2,
-        tension: 0.4,
-        fill: true, // Izinkan untuk mengisi area di bawah garis
-        pointRadius: 0,  // Disable rendering points
-        shadowOffsetX: 0, // Atur offset bayangan ke 0
-        shadowOffsetY: 10, // Atur offset bayangan ke 8 (arah ke bawah)
-        shadowBlur: 10, // Atur blur bayangan
-        shadowColor: 'rgba(0, 128, 0, 0.8)', // Atur warna bayangan
-      }]
-    },
-    options: {
-      scales: {
-        x: {
-          display: false, // Menonaktifkan grid pada sumbu x
-        },
-        y: {
-          display: true, // Menonaktifkan grid pada sumbu y
-          beginAtZero: false
-        }
+  type: 'line',
+  data: {
+    labels: Array.from({ length: initialData.length }).fill('.'),
+    datasets: [{
+      label: 'Market Gabungan Saham ID & US',
+      data: initialData,
+      borderColor: 'green',
+      backgroundColor: gradient,
+      borderWidth: 2,
+      tension: 0.4,
+      fill: true,
+      pointRadius: 0,
+      borderSkipped: 'round', // Mengatur lengkungan ujung garis
+      shadowOffsetX: 0,
+      shadowOffsetY: 10,
+      shadowBlur: 10,
+      shadowColor: 'rgba(0, 128, 0, 0.8)',
+    }]
+  },
+  options: {
+    scales: {
+      x: {
+        display: false,
       },
-      plugins: {
-        legend: {
-          display: true // Menyembunyikan legend
-        },
-        tooltip: {
-          enabled: false
-        }
+      y: {
+        display: true,
+        beginAtZero: false
+      }
+    },
+    plugins: {
+      legend: {
+        display: true
+      },
+      tooltip: {
+        enabled: false
       }
     }
-  });
+  }
+});
+
 
   // Update order book table with random data every 5 seconds
   function updateOrderBookTable() {
@@ -333,7 +335,7 @@
         bidCell.textContent = (Math.random() * 1000).toFixed(2);
 
         const askCell = newRow.insertCell();
-        askCell.textContent = (Math.random() * 100).toFixed(2);
+        askCell.textContent = (Math.random() * 1000).toFixed(2);
 
         const lotCell2 = newRow.insertCell();
         lotCell2.textContent = Math.floor(Math.random() * 1000);
@@ -356,7 +358,7 @@
     const marketCountdown = document.getElementById('marketCountdown');
 
     if (today >= 1 && today <= 5) {
-      marketStatus.innerHTML = 'Market Open <br><br> || 1 Day (<span style="color: green;">+1,25%</span>)';
+      marketStatus.innerHTML = 'Market Open <br><br> || 1 Day (<span style="color: red;">-3,75%</span>)';
       marketStatus.classList.add('open');
       marketStatus.classList.remove('closed');
       marketCountdown.textContent = '';
@@ -383,7 +385,7 @@
   setInterval(() => {
     updateMarketStatus();
     updateOrderBookTable();
-  }, 100);
+  }, 2000);
 </script>
 
 </body>
