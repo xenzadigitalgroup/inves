@@ -240,11 +240,14 @@
   <div id="chart-description">
     <h3>Jadwal</h3>
     <p><h5>Pengurangan Kepemilikan Saham 1:2</h5></p>
-    <br>
-    <p>Hari           :</p>
-    <p>Tanggal        :</p>
-    <p>Jam                   :</p>
+    <p>Hari Jum'at</p>
+    <p>Tanggal 07 Mei 2024</p>
+    <p>Jam 09:00 WIB</p>
     <p><b>Keterangan</b>     : Demi menjaga kestabilan harga saham, kami akan mengurangi jumlah saham kepemilikan publik yang telah beredar.</p>
+    <br>
+    <h5>Penebusan Kembali Kepemilikan Saham</h5></p>
+    <p>Hari Senin-Jum'at</p>
+    <p>Tanggal 13 Mei 2024 - 17 Mei 2024</p>
   </div>
 </div>
 <div id="copyright">
@@ -255,20 +258,16 @@
 <script>
   // 60 Data
   const data = {
-    '1d': [ 400, 550, 450, 450, 450, 420, 420, 400, 375, 360,
-            350, 330, 330, 340, 340, 330, 330, 320, 320, 340,
-            340, 340, 350, 350, 350, 360, 360, 350, 340, 350, 
-            350, 350, 350, 360, 360, 360, 360, 360, 370, 370, 
-            360, 360, 350, 350, 350, 380, 380, 380, 390, 390,
-            390, 400, 430, 430, 430, 460, 470, 470, 500, 500],
-    '1w': [ 130, 150, 170, 190, 200, 210, 200, 210, 250, 320,
-            340, 350, 360, 380, 370, 400, 360, 370, 370, 360,
-            360, 350, 350, 350, 360, 370, 370, 360, 360, 350,
-            350, 350, 360, 370, 370, 360, 360, 350, 350, 350,
-            330, 340, 340, 340, 340, 350, 380, 380, 380, 390,
-            390, 400, 430, 430, 430, 460, 470, 470, 500, 500],
+    '1d': [ 500, 505, 505, 505, 505, 490, 490, 485, 505, 510, 
+            510, 510, 510, 510, 505, 505, 505, 510, 510, 515,
+            510, 510, 510, 515, 515, 515, 520, 520, 525, 525,
+            510, 510, 510, 515, 515, 515, 515, 515, 515, 515,
+            515, 510, 510, 510, 505, 505, 515, 520, 520, 520,
+            520, 520, 520, 520, 525, 530, 530, 530, 550, 550],
+    '1w': [ 500, 485, 490, 500, 505, 510, 515, 520, 505, 510,
+            515, 520, 530, 550],
     '1m': [ 210, 130, 190, 260, 340, 340, 340, 340, 470, 470,
-            500, 500],
+            500, 500, 485, 510, 520, 505, 520, 530, 550],
     '1y': [ 2000, 1500, 1900, 2100, 2500, 2300, 2700, 2800, 3000, 3500,
             3550, 3500, 3200, 3400, 3200, 3500, 3750, 3800, 3900, 4000,
             4100, 4200, 3900, 3500, 4250, 4350, 4400, 4300, 4450, 4500,
@@ -379,7 +378,7 @@
     const marketCountdown = document.getElementById('marketCountdown');
 
     if (today >= 1 && today <= 5) {
-      marketStatus.innerHTML = 'Market Open <br><br> || 1 Day (<span style="color: green;">+2,32%</span>)';
+      marketStatus.innerHTML = 'Market Open <br><br> || 1 Day (<span style="color: green;">+10,0%</span>)';
       marketStatus.classList.add('open');
       marketStatus.classList.remove('closed');
       marketCountdown.textContent = '';
