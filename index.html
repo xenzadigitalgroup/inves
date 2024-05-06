@@ -297,15 +297,24 @@
   };
 
   // Initial data for the chart
-  const initialData = data['1d'];
+    const initialData = data['1d'];
 
   // Function to update the chart based on the selected time range
-  function updateChart(timeRange) {
+    function updateChart(timeRange) {
     const chartData = data[timeRange];
 
-    myChart.data.datasets[0].data = chartData;
+  // Limit the chart data to show only the latest 80 data points
+    const latestData = chartData.slice(-80);
+
+    myChart.data.datasets[0].data = latestData;
+    myChart.data.labels = Array.from({ length: latestData.length }).fill('.');
+  
+  // Update x-axis scale to match the number of data points
+    myChart.options.scales.x.ticks.min = 0;
+    myChart.options.scales.x.ticks.max = latestData.length - 1;
+
     myChart.update();
-  }
+}
 
   // Chart.js configuration
   const ctx = document.getElementById('myChart').getContext('2d');
