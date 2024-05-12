@@ -257,16 +257,7 @@
   <!--Isi dari halaman-->
 
   <div id="chart-description">
-    <h3>Jadwal</h3>
-    <p><h5>Pengurangan Kepemilikan Saham 1:2</h5></p>
-    <p>Hari Jum'at</p>
-    <p>Tanggal 07 Mei 2024</p>
-    <p>Jam 09:00 WIB</p>
-    <p><b>Keterangan</b> : Demi menjaga kestabilan harga saham, kami akan mengurangi jumlah saham kepemilikan publik yang telah beredar.</p>
-    <br>
-    <h5>Penebusan Kembali Kepemilikan Saham</h5></p>
-    <p>Hari Senin-Jum'at</p>
-    <p>Tanggal 13 Mei 2024 - 17 Mei 2024</p>
+    <p><h4>Tidak ada jadwal dalam waktu dekat</h4></p>
   </div>
 </div>
 <div id="copyright">
@@ -277,26 +268,22 @@
 <script>
   // 100 Data
   const data = {
-    '1d': [ 550, 600, 610, 610, 610, 610, 610, 610, 610, 605,
-            605, 605, 610, 610, 610, 610, 605, 605, 605, 605,
-            600, 600, 600, 600, 605, 605, 605, 610, 610, 610,
-            610, 605, 605, 605, 610, 610, 610, 605, 605, 605,
-            600, 600, 600, 600, 600, 600, 600, 600, 570, 620,
-            620, 620, 610, 610, 610, 605, 605, 605, 610, 610,
-            610, 610, 620, 630, 640, 650, 650, 660, 660, 680,
-            680, 720, 720, 720, 710, 710, 710, 720, 720, 720,
-            700, 700, 700, 700, 710, 710, 710, 700, 700, 715,
-            720, 720, 720, 720, 715, 715, 715, 715, 715, 715],
+    '1d': [ 715, 710, 710, 700, 700, 700, 700, 700, 700, 700,
+            715, 700, 700, 720, 730, 710, 720, 730, 715, 710,
+            710, 710, 710, 710, 750, 750, 730, 770, 770, 760,
+            760, 760, 800, 810, 820, 830, 830, 830, 830, 830,
+            820, 820, 820, 830, 830, 830, 850, 850, 850, 900,
+            860, 860, 870, 870, 870, 860, 860, 860, 900, 900,
+            910, 950, 950, 950, 950, 950, 950, 900, 970, 970,
+            970, 970, 970, 950, 950, 950, 950, 950, 950, 950,
+            900, 900, 900, 900, 900, 900, 900, 900, 900, 900,
+            1000, 1000, 990, 1000, 990, 990, 970, 1000, 1000, 1000],
 
-    '1w': [ 500, 485, 490, 500, 505, 510, 515, 520, 505, 510,
-            515, 520, 530, 550, 450, 490, 500, 520, 550, 580,
-            650, 620, 630, 580, 620, 630, 630, 640, 650, 650,
-            650, 680, 700, 700, 710, 740, 790, 810, 665, 650,
-            610, 600, 550, 620, 715],
+    '1w': [ 715, 700, 750, 800, 850, 910, 1000],
 
     '1m': [ 210, 130, 190, 260, 340, 470, 470, 485, 505, 520, 
             530, 550, 630, 680, 740, 790, 810, 665, 600, 550,
-            715],
+            715, 700, 750, 850, 910, 1000],
 
     '1y': [ 2000, 1500, 1900, 2100, 2500, 2300, 2700, 2800, 3000, 3500,
             3550, 3500, 3200, 3400, 3200, 3500, 3750, 3800, 3900, 4000,
@@ -430,7 +417,7 @@
 
     if (today >= 1 && today <= 5) {
       // Mengatur teks dan gaya pada elemen HTML dengan menggunakan kelas CSS
-      marketStatus.innerHTML = 'Market Open <span class="silver-text bold-text">[Normal]</span> <br><br> || 1 Day (<span class="green-text">+30,0%</span>)';
+      marketStatus.innerHTML = 'Market Open <span class="silver-text bold-text">[Normal]</span> <br><br> || 1 Day (<span class="green-text">+40,0%</span>)';
       marketStatus.classList.add('open');
       marketStatus.classList.remove('closed');
       marketCountdown.textContent = '';
