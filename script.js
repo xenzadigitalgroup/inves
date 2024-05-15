@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
           label: 'Rata-rata',
           data: Array(initialData.length).fill(averageValue),
           borderColor: 'silver',
-          borderWidth: 2,
+          borderWidth: 0,
           fill: false,
           pointRadius: 0, // Menghilangkan titik pada garis rata-rata
           tooltip: {
