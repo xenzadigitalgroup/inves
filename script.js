@@ -201,66 +201,83 @@ function calculateAverage(dataArray) {
   setInterval(updateOrderBookTable, 3000);
 
   function updateMarketStatus() {
+    const marketStatusElement = document.getElementById('marketStatus');
+    const currentDateElement = document.getElementById('currentDate');
+    const marketCountdownElement = document.getElementById('marketCountdown');
+  
     const today = new Date();
-    const day = today.getDay();
-    const hour = today.getHours();
-    const minute = today.getMinutes();
-    const second = today.getSeconds();
-    const date = today.getDate();
-    const month = today.getMonth() + 1; // Months are zero-based
-    const year = today.getFullYear();
+    const dayOfWeek = today.getDay();
+    const currentHour = today.getHours();
   
-    const marketStatus = document.getElementById('marketStatus');
-    const currentDate = document.getElementById('currentDate');
+    // Check if it's a weekday (Monday to Friday)
+    if (dayOfWeek >= 1 && dayOfWeek <= 5) {
+      const marketOpenTime = new Date(today);
+      marketOpenTime.setHours(9, 0, 0); // Market opens at 9:00 AM
   
-    // Calculate next market open time based on current day and time
-    let nextOpen = new Date(today);
+      const marketCloseTime = new Date(today);
+      marketCloseTime.setHours(16, 0, 0); // Market closes at 4:00 PM
   
-    if (day >= 1 && day <= 5) {
-      // Weekday (Monday to Friday): Calculate time until next open on the next day (Monday to Friday) at 9:00
-      if (hour < 16) {
-        // Market is closed, calculate time until 16:00 today
-        nextOpen.setHours(16, 0, 0, 0); // Next open time today at 16:00
+      // Check if the current time is before market close
+      if (today >= marketOpenTime && today < marketCloseTime) {
+        marketStatusElement.textContent = 'Market Open';
+        marketStatusElement.classList.add('open');
+        marketStatusElement.classList.remove('closed');
+        marketCountdownElement.textContent = ''; // Clear countdown
+  
+        currentDateElement.textContent = `Tanggal: ${today.toLocaleDateString()}`;
       } else {
-        // Market is closed after 16:00, calculate time until 9:00 on the next day (Monday to Friday)
-        nextOpen.setDate(today.getDate() + 1); // Next open day
-        nextOpen.setHours(9, 0, 0, 0); // Next open time at 9:00
+        // Market is closed, calculate time until next open
+        const nextOpenTime = new Date(today);
+  
+        // If current time is after market close, calculate next open time
+        if (today >= marketCloseTime) {
+          nextOpenTime.setDate(today.getDate() + 1); // Move to next day
+        }
+  
+        nextOpenTime.setHours(9, 0, 0); // Next open at 9:00 AM
+  
+        const timeDifference = nextOpenTime.getTime() - today.getTime();
+        const secondsUntilOpen = Math.floor(timeDifference / 1000);
+  
+        const hours = Math.floor(secondsUntilOpen / 3600);
+        const minutes = Math.floor((secondsUntilOpen % 3600) / 60);
+        const seconds = secondsUntilOpen % 60;
+  
+        marketStatusElement.textContent = 'Market Closed';
+        marketStatusElement.classList.add('closed');
+        marketStatusElement.classList.remove('open');
+  
+        marketCountdownElement.textContent = `Market akan buka dalam ${hours}h ${minutes}m ${seconds}s`;
+  
+        currentDateElement.textContent = `Tanggal: ${today.toLocaleDateString()}`;
       }
-    } else if (day === 0 || day === 6) {
-      // Weekend (Saturday or Sunday): Calculate time until Monday 9:00
-      nextOpen.setDate(today.getDate() + (1 + 7 - day) % 7); // Next Monday
-      nextOpen.setHours(9, 0, 0, 0); // Next open time on Monday at 9:00
-    }
-  
-    const timeDifference = nextOpen - today;
-    const countdown = Math.max(timeDifference, 0) / 1000; // Ensure countdown is non-negative
-  
-    if (hour >= 9 && hour < 16 && day >= 1 && day <= 5) {
-      // Market is open
-      marketStatus.innerHTML = 'Market Open <span class="silver-text bold-text">[NORMAL]</span> <br><br> || 1 Day (<span class="green-text">+11,12%</span>)';
-      marketStatus.classList.add('open');
-      marketStatus.classList.remove('closed');
-      marketCountdown.textContent = '';
     } else {
-      // Market is closed
-      marketStatus.textContent = 'Market Closed';
-      marketStatus.classList.add('closed');
-      marketStatus.classList.remove('open');
+      // Weekend (Saturday or Sunday)
+      marketStatusElement.textContent = 'Market Closed';
+      marketStatusElement.classList.add('closed');
+      marketStatusElement.classList.remove('open');
   
-      const hours = Math.floor(countdown / 3600);
-      const minutes = Math.floor((countdown % 3600) / 60);
-      const seconds = Math.floor(countdown % 60);
-      marketCountdown.textContent = `Market akan buka dalam ${hours}h ${minutes}m ${seconds}s`;
+      // Find the next Monday at 9:00 AM
+      let nextMonday = new Date(today);
+      nextMonday.setDate(today.getDate() + ((1 + 7 - dayOfWeek) % 7));
+      nextMonday.setHours(9, 0, 0);
+  
+      const timeDifference = nextMonday.getTime() - today.getTime();
+      const secondsUntilOpen = Math.floor(timeDifference / 1000);
+  
+      const hours = Math.floor(secondsUntilOpen / 3600);
+      const minutes = Math.floor((secondsUntilOpen % 3600) / 60);
+      const seconds = secondsUntilOpen % 60;
+  
+      marketCountdownElement.textContent = `Market will open on Monday at 9:00 AM`;
+      currentDateElement.textContent = `Tanggal: ${today.toLocaleDateString()}`;
     }
-  
-    currentDate.textContent = `Tanggal: ${date}/${month}/${year}`;
   }
   
   // Initial update
   updateMarketStatus();
   
-  // Update status and order book every second
-  setInterval(() => {
-    updateMarketStatus();
-  }, 1000);
+  // Update every second
+  setInterval(updateMarketStatus, 1000);
+  
   
