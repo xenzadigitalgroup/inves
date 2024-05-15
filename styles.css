@@ -1,0 +1,177 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  header {
+    background: #42A5F5;
+    color: #fff;
+    text-align: left;
+    padding: 10px;
+    position: fixed;
+    width: 96%;
+    z-index: 1000;
+    border-radius: 0px 0px 10px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    top: 0;
+  }
+  
+  header a {
+    text-decoration: none;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  header span {
+    font-weight: bold;
+    font-size: 23px;
+  }
+  
+  header img {
+    margin-right: 20px;
+  }
+  
+  #chart-container {
+    width: 92%;
+    margin: auto;
+    position: relative;
+    margin-top: 90px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  #time-range-buttons {
+    text-align: center;
+    margin-top: 10px;
+  }
+  
+  #time-range-buttons button {
+    margin: 5px;
+    border-radius: 10px;
+    border-color: #0000004d;
+    background-color: #ffffff;
+    color: #000000;
+    padding: 8px 10px;
+    cursor: pointer;
+    width: 150px;
+  }
+  
+  #myChart {
+    flex: 1;
+  }
+  
+  #chart-description {
+    text-align: center;
+    margin-top: 20px;
+    color: #000000;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 8px;
+  }
+  
+  #chart-description h3 {
+    text-align: left;
+  }
+  
+  #chart-description p {
+    text-align: left;
+    margin: 5px 0;
+  }
+  
+  #orderBookContainer {
+    margin-top: 20px;
+    overflow-x: auto;
+    border-radius: 10px;
+  }
+  
+  #orderBook {
+    border-collapse: collapse;
+    width: 100%;
+    font-family: 'Arial', sans-serif; /* Mengubah gaya tulisan */
+    font-size: 14px; /* Membuat tulisan sedikit lebih kecil */
+  }
+  
+  #orderBook th, #orderBook td {
+    border: 1px solid #ddd;
+    padding: 6px; /* Sesuaikan padding jika diperlukan */
+  }
+  
+  #orderBook th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+  }
+  
+  #marketOpenIndicator {
+    width: 10px;
+    height: 10px;
+    background-color: green;
+    border-radius: 50%;
+    display: inline-block;
+    animation: blinker 1s linear infinite;
+    margin-right: 5px;
+  }
+  
+  @keyframes blinker {
+    50% {
+      opacity: 0;
+    }
+  }
+  
+  #copyright {
+    text-align: center;
+    margin-top: 20px;
+    color: #777;
+    font-size: 12px;
+    margin-bottom: 20px;
+  }
+  
+  @media only screen and (max-width: 600px) {
+    #time-range-buttons button {
+      width: auto;
+      margin: 5px;
+    }
+  }
+  
+  #marketCountdown {
+    border: 1px solid #ccc;
+    background-color: #f2f2f2;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+  }
+  
+  #help-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    background-color: #00000000;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  #help-button:hover {
+    background-color: #0b7dda00;
+  }
+  
+  .bold-text {
+    font-weight: bold;
+  }
+  .red-text {
+    color: red;
+  }
+  .green-text {
+    color: green;
+  }
+  
+  .silver-text {
+    color: silver;
+  }
+  
