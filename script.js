@@ -170,7 +170,7 @@ function calculateAverage(dataArray) {
         askCell.textContent = (Math.random() * 2000).toFixed(2);
   
         const lotCell2 = newRow.insertCell();
-        lotCell2.textContent = freqValue1 * 7; // Lot is 10 times the Freq value
+        lotCell2.textContent = freqValue1 * 7; // Lot is 7 times the Freq value
   
         const freqCell2 = newRow.insertCell();
         const freqValue2 = Math.floor(Math.random() * 200);
@@ -220,6 +220,9 @@ function calculateAverage(dataArray) {
       // Check if the current time is before market close
       if (today >= marketOpenTime && today < marketCloseTime) {
         marketStatusElement.textContent = 'Market Open';
+     // Mengatur teks dan gaya pada elemen HTML dengan menggunakan kelas CSS
+      marketStatus.innerHTML = 'Market Open <span class="silver-text bold-text">[NORMAL]</span> <br><br> || 1 Day (<span class="green-text">+11,12%</span>)';
+
         marketStatusElement.classList.add('open');
         marketStatusElement.classList.remove('closed');
         marketCountdownElement.textContent = ''; // Clear countdown
