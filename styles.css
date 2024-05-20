@@ -47,16 +47,17 @@ body {
   
   #time-range-buttons {
     text-align: center;
-    margin-top: 10px;
+    margin-top: 0px;
+    margin-bottom: 10px;
   }
   
   #time-range-buttons button {
     margin: 5px;
     border-radius: 10px;
-    border-color: #0000004d;
+    border-color: #0000001d;
     background-color: #ffffff;
     color: #000000;
-    padding: 8px 10px;
+    padding: 6px 8px;
     cursor: pointer;
     width: 150px;
   }
