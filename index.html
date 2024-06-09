@@ -18,19 +18,19 @@
 <div id="chart-container">
   <h5 id="h4style">Harga market gabungan saham XDID & XTWR</h5>
   <h6 id="currentDate" style="margin-top: -10px;"></h6>
-  <b style="margin-bottom: 20px; margin-top: -10px; color: green;">Rp5.050 (+1,00%)<!--Rubah harganya dengan harga terbaru--></b>
+  <b style="margin-bottom: 20px; margin-top: -10px; color: green;">Rp5.090 (+0,80%)<!--Rubah harganya dengan harga terbaru--></b>
 
   <!--Canvas Grafik-->
   <canvas id="myChart" class="chart-container"></canvas>
   <!--Canvas Grafik-->
 
   <div id="time-range-buttons">
-    <button onclick="updateChart('1d')">1D</button>
-    <button onclick="updateChart('1w')">1W</button>
-    <button onclick="updateChart('1m')">1M</button>
-    <button onclick="updateChart('ytd')">YTD</button>
-    <button onclick="updateChart('1y')">1Y</button>
-    <button onclick="updateChart('3y')">3Y</button>
+    <button onclick="updateChart('1d', this)">1D</button>
+    <button onclick="updateChart('1w', this)">1W</button>
+    <button onclick="updateChart('1m', this)">1M</button>
+    <button onclick="updateChart('ytd', this)">YTD</button>
+    <button onclick="updateChart('1y', this)">1Y</button>
+    <button onclick="updateChart('3y', this)">3Y</button>
   </div>
 
   <!-- Tombol bantuan -->
