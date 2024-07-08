@@ -50,7 +50,7 @@ body {
     margin-top: 0px;
     margin-bottom: 10px;
   }
-  
+
   #time-range-buttons button {
     margin: 5px;
     border-radius: 10px;
@@ -60,6 +60,11 @@ body {
     padding: 6px 8px;
     cursor: pointer;
     width: 150px;
+  }
+
+  #time-range-buttons button.active {
+    background-color: #0051ff; /* Warna biru */
+    color: #FFFFFF; /* Warna teks putih */
   }
   
   #myChart {
@@ -176,3 +181,6 @@ body {
     color: silver;
   }
   
+  .yellow-text {
+    color: rgb(255, 230, 0);
+  }
