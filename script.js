@@ -337,3 +337,13 @@ updateMarketStatus();
 
 // Update every second
 setInterval(updateMarketStatus, 1000);
+
+document.querySelectorAll('#time-range-buttons button').forEach(button => {
+    button.addEventListener('click', function() {
+      // Hapus kelas 'active' dari semua tombol
+      document.querySelectorAll('#time-range-buttons button').forEach(btn => btn.classList.remove('active'));
+      
+      // Tambahkan kelas 'active' ke tombol yang ditekan
+      this.classList.add('active');
+    });
+  });
