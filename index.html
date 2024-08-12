@@ -18,20 +18,21 @@
 <div id="chart-container">
   <h5 id="h4style">Harga market gabungan saham XDID & XTWR</h5>
   <h6 id="currentDate" style="margin-top: -10px;"></h6>
-  <b style="margin-bottom: 20px; margin-top: -10px; color: rgb(0, 211, 0);">Rp5.250 (+1,36%)<!--Rubah harganya dengan harga terbaru--></b>
+  <b style="margin-bottom: 20px; margin-top: -10px; color: rgb(211, 0, 0);">Rp5.160 (-1,7%)<!--Rubah harganya dengan harga terbaru--></b>
 
   <!--Canvas Grafik-->
   <canvas id="myChart" class="chart-container"></canvas>
   <!--Canvas Grafik-->
 
-  <div id="time-range-buttons">
-    <button onclick="updateChart('1d', this)">1D</button>
-    <button onclick="updateChart('1w', this)">1W</button>
-    <button onclick="updateChart('1m', this)">1M</button>
-    <button onclick="updateChart('ytd', this)">YTD</button>
-    <button onclick="updateChart('1y', this)">1Y</button>
-    <button onclick="updateChart('3y', this)">3Y</button>
-  </div>
+<div id="time-range-buttons">
+    <button data-time-range="1d" onclick="updateChart('1d', this)">1D</button>
+    <button data-time-range="1w" onclick="updateChart('1w', this)">1W</button>
+    <button data-time-range="1m" onclick="updateChart('1m', this)">1M</button>
+    <button data-time-range="ytd" onclick="updateChart('ytd', this)">YTD</button>
+    <button data-time-range="1y" onclick="updateChart('1y', this)">1Y</button>
+    <button data-time-range="3y" onclick="updateChart('3y', this)">3Y</button>
+</div>
+
 
   <!-- Tombol bantuan -->
   <a href="https://xenzadigitalgroup.github.io/chatbot/" id="help-button">
