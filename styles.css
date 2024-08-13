@@ -12,7 +12,7 @@ body {
     position: fixed;
     width: 96%;
     z-index: 1000;
-    border-radius: 0px 0px 10px 10px;
+    border-radius: 0px 0px 0px 0px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -66,7 +66,7 @@ body {
   
   #time-range-buttons button.active, 
   #time-range-buttons button:focus {
-    border-bottom-color: #0051ff; /* Warna biru di bagian border bawah saat aktif atau fokus */
+    border-bottom-color: #abb0bd8a; /* Warna biru di bagian border bawah saat aktif atau fokus */
     color: #000000; /* Warna teks tetap hitam */
     background-color: #ffffff; /* Background tetap putih */
     
@@ -194,3 +194,57 @@ body {
   .yellow-text {
     color: rgb(255, 230, 0);
   }
+
+  #orderBookContainer {
+    max-width: 100%;
+    margin: 20px auto;
+    overflow-x: auto;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  #orderBook {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+  }
+  
+  #orderBook thead {
+    background-color: #4CAF50;
+    color: rgb(0, 0, 0);
+  }
+  
+  #orderBook th,
+  #orderBook td {
+    padding: 12px 15px;
+    text-align: center;
+  }
+  
+  #orderBook tbody tr {
+    border-bottom: 1px solid #e0e0e0;
+    transition: background-color 0.2s ease;
+  }
+  
+  #orderBook tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  #orderBook tbody tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  #orderBook th {
+    position: sticky;
+    top: 0;
+  }
+  
+  #orderBook tbody td {
+    color: #333;
+  }
+  
+  #orderBookContainer {
+    margin-top: 30px;
+  }
+  
